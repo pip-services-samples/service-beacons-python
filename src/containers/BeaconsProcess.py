@@ -10,9 +10,9 @@
 """
 import sys
 
-from pip_services3_container import ProcessContainer
-from pip_services3_rpc.build import DefaultRpcFactory
-from pip_services3_swagger.build import DefaultSwaggerFactory
+from pip_services3_container.ProcessContainer import ProcessContainer
+from pip_services3_rpc.build.DefaultRpcFactory import DefaultRpcFactory
+from pip_services3_swagger.build.DefaultSwaggerFactory import DefaultSwaggerFactory
 
 from ..build.BeaconsServiceFactory import BeaconsServiceFactory
 
