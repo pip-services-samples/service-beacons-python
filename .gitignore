@@ -1,5 +1,4 @@
 /.idea
-/data/*test.json
 /build
 /dist
 .DS_Store
