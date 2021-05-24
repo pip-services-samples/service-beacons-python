@@ -13,7 +13,6 @@ import time
 
 import requests
 from pip_services3_commons.config import ConfigParams
-from pip_services3_commons.errors import InvocationException
 from pip_services3_commons.refer import References, Descriptor
 from pip_services3_commons.run import Parameters
 
@@ -22,11 +21,19 @@ from src.logic.BeaconsController import BeaconsController
 from src.persistence.BeaconsMemoryPersistence import BeaconsMemoryPersistence
 from src.services.version1.BeaconsHttpServiceV1 import BeaconsHttpServiceV1
 
-BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001", "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]}, 50.0)
-BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002", "TestBeacon2", {"type": 'Point', "coordinates": [2, 2]}, 70.0)
-BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003", "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]}, 50.0)
+BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001", "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]},
+                   50.0)
+BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002", "TestBeacon2", {"type": 'Point', "coordinates": [2, 2]},
+                   70.0)
+BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003", "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]},
+                   50.0)
 
-class TestBeaconsHttpServiceV1():
+
+class TestBeaconsHttpServiceV1:
+    _persistence: BeaconsMemoryPersistence = None
+    _controller: BeaconsController = None
+    _service: BeaconsHttpServiceV1 = None
+
     @classmethod
     def setup_class(cls):
         cls._persistence = BeaconsMemoryPersistence()
@@ -99,7 +106,8 @@ class TestBeaconsHttpServiceV1():
         assert beacon['id'] == beacon1['id']
 
         # Calculate position for one beacon
-        position = self.invoke("/v1/beacons/calculate_position", Parameters.from_tuples("site_id", '1', "udis", ['00001']))
+        position = self.invoke("/v1/beacons/calculate_position",
+                               Parameters.from_tuples("site_id", '1', "udis", ['00001']))
         assert position != None
         assert "Point" == position["type"]
         assert 2 == len(position["coordinates"])
