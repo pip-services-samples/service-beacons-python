@@ -15,7 +15,7 @@ from pip_services3_commons.data import PagingParams, FilterParams, DataPage
 from src.data.version1 import BeaconV1
 
 
-class IBeaconsController():
+class IBeaconsController:
     def get_beacons_by_filter(self, correlation_id: Optional[str], filter: FilterParams, paging: PagingParams) -> DataPage:
         raise NotImplementedError('Method from interface definition')
 

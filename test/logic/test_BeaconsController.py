@@ -20,6 +20,9 @@ BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002", "TestBeacon2", {"typ
 BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003", "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]}, 50)
 
 class TestBeaconsController():
+    _persistence: BeaconsMemoryPersistence
+    _controller: BeaconsController
+
     @classmethod
     def setup_class(cls):
         cls._persistence = BeaconsMemoryPersistence()

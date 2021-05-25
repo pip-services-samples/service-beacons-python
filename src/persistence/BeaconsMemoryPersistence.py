@@ -8,7 +8,7 @@
     :copyright: Conceptual Vision Consulting LLC 2018-2021, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
-from typing import Optional, Any
+from typing import Optional, Any, Callable
 
 from pip_services3_commons.data import FilterParams, DataPage, PagingParams
 from pip_services3_data.persistence import IdentifiableMemoryPersistence
@@ -22,10 +22,7 @@ class BeaconsMemoryPersistence(IdentifiableMemoryPersistence, IBeaconsPersistenc
         super(BeaconsMemoryPersistence, self).__init__()
         self._max_page_size = 1000
 
-    def get_page_by_filter(self, correlation_id: Optional[str], filter: FilterParams, paging: PagingParams,
-                           sort: Any = None, select: Any = None) -> DataPage:
-
-        # compose filter
+    def __compose_filter(self, filter: FilterParams) -> Callable:
         filter = filter if filter is not None else FilterParams()
 
         id = filter.get_as_nullable_string("id")
@@ -48,8 +45,14 @@ class BeaconsMemoryPersistence(IdentifiableMemoryPersistence, IBeaconsPersistenc
             if udis is not None and item['udi'] not in udis:
                 return False
             return True
+        
+        return filter_beacons
 
-        return super(BeaconsMemoryPersistence, self).get_page_by_filter(correlation_id, filter_beacons, paging=paging)
+    def get_page_by_filter(self, correlation_id: Optional[str], filter: FilterParams, paging: PagingParams,
+                           sort: Any = None, select: Any = None) -> DataPage:
+
+        
+        return super(BeaconsMemoryPersistence, self).get_page_by_filter(correlation_id, self.__compose_filter(filter), paging=paging)
 
     def get_one_by_udi(self, correlation_id: Optional[str], udi: str) -> dict:
         if udi is None:

@@ -11,15 +11,16 @@
 from pip_services3_commons.data import PagingParams, FilterParams
 
 from src.data.version1 import BeaconV1, BeaconTypeV1
+from src.persistence import IBeaconsPersistence
 
 BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001", "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]}, 50)
 BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002", "TestBeacon2", {"type": 'Point', "coordinates": [2, 2]}, 70)
 BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003", "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]}, 50)
 
 class BeaconsPersistenceFixture():
-    _persistence = None
+    _persistence: IBeaconsPersistence
 
-    def __init__(self, persistence):
+    def __init__(self, persistence: IBeaconsPersistence):
         self._persistence = persistence
 
     def test_create_beacons(self):

@@ -13,6 +13,9 @@ from .BeaconsPersistenceFixture import BeaconsPersistenceFixture
 
 
 class TestBeaconMemoryPersistence():
+    persistence: BeaconsMemoryPersistence
+    fixture: BeaconsPersistenceFixture
+
     @classmethod
     def setup_class(cls):
         cls.persistence = BeaconsMemoryPersistence()
