@@ -41,10 +41,10 @@ class BeaconsController(IBeaconsController, IConfigurable, IReferenceable, IComm
     def get_beacons_by_filter(self, correlation_id: Optional[str], filter: FilterParams, paging: PagingParams) -> DataPage:
         return self.__persistence.get_page_by_filter(correlation_id, filter, paging)
 
-    def get_beacon_by_id(self, correlation_id: Optional[str], id: str) -> dict:
+    def get_beacon_by_id(self, correlation_id: Optional[str], id: str) -> BeaconV1:
         return self.__persistence.get_one_by_id(correlation_id, id)
 
-    def get_beacon_by_udi(self, correlation_id: Optional[str], udi: str) -> dict:
+    def get_beacon_by_udi(self, correlation_id: Optional[str], udi: str) -> BeaconV1:
         return self.__persistence.get_one_by_udi(correlation_id, udi)
 
     def calculate_position(self, correlation_id: Optional[str], site_id: str, udis: List[str]) -> Any:
@@ -59,10 +59,10 @@ class BeaconsController(IBeaconsController, IConfigurable, IReferenceable, IComm
         lng = 0
         count = 0
         for beacon in beacons:
-            if beacon['center'] is not None and beacon['center']['type'] == "Point" and len(
-                    beacon['center']['coordinates']) > 1:
-                lng = lng + beacon['center']['coordinates'][0]
-                lat = lat + beacon['center']['coordinates'][1]
+            if beacon.center is not None and beacon.center['type'] == "Point" and len(
+                    beacon.center['coordinates']) > 1:
+                lng = lng + beacon.center['coordinates'][0]
+                lat = lat + beacon.center['coordinates'][1]
                 count = count + 1
 
         if count == 0:
@@ -71,11 +71,11 @@ class BeaconsController(IBeaconsController, IConfigurable, IReferenceable, IComm
         position = {"type": 'Point', "coordinates": [lng / count, lat / count]}
         return position
 
-    def create_beacon(self, correlation_id: Optional[str], entity: BeaconV1) -> dict:
+    def create_beacon(self, correlation_id: Optional[str], entity: BeaconV1) -> BeaconV1:
         return self.__persistence.create(correlation_id, entity)
 
-    def update_beacon(self, correlation_id: Optional[str], entity: BeaconV1) -> dict:
+    def update_beacon(self, correlation_id: Optional[str], entity: BeaconV1) -> BeaconV1:
         return self.__persistence.update(correlation_id, entity)
 
-    def delete_beacon_by_id(self, correlation_id: Optional[str], id: str) -> dict:
+    def delete_beacon_by_id(self, correlation_id: Optional[str], id: str) -> BeaconV1:
         return self.__persistence.delete_by_id(correlation_id, id)

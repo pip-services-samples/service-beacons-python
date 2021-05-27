@@ -14,6 +14,7 @@ from pip_services3_commons.data import FilterParams, PagingParams, DataPage
 from pip_services3_mongodb.persistence import IdentifiableMongoDbPersistence
 
 from .IBeaconsPersistence import IBeaconsPersistence
+from ..data.version1 import BeaconV1
 
 
 class BeaconsMongoDbPersistence(IdentifiableMongoDbPersistence, IBeaconsPersistence):
@@ -50,7 +51,7 @@ class BeaconsMongoDbPersistence(IdentifiableMongoDbPersistence, IBeaconsPersiste
         return super(BeaconsMongoDbPersistence, self).get_page_by_filter(correlation_id, self.compose_filter(filter),
                                                                          paging, None, None)
 
-    def get_one_by_udi(self, correlation_id: Optional[str], udi: str) -> dict:
+    def get_one_by_udi(self, correlation_id: Optional[str], udi: str) -> BeaconV1:
         if udi is None:
             return None
         item = self._collection.find_one({'udi': udi})
