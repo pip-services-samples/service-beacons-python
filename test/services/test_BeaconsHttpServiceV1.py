@@ -124,7 +124,7 @@ class TestBeaconsHttpServiceV1:
 
         # Try to get deleted beacon
         beacon = self.invoke("/v1/beacons/get_beacon_by_id", Parameters.from_tuples("id", beacon1['id']))
-        assert beacon is False
+        assert not beacon
 
     def invoke(self, route, entity) -> Union[bool, dict]:
         params = {}
