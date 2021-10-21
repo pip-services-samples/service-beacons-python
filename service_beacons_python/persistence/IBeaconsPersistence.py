@@ -12,7 +12,7 @@ from typing import Optional
 
 from pip_services3_commons.data import PagingParams, FilterParams, DataPage
 
-from src.data.version1 import BeaconV1
+from service_beacons_python.data.version1 import BeaconV1
 
 
 class IBeaconsPersistence:

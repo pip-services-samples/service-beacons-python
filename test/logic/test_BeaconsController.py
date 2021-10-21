@@ -11,9 +11,9 @@
 from pip_services3_commons.data import FilterParams, PagingParams
 from pip_services3_commons.refer import References, Descriptor
 
-from src.data.version1 import BeaconV1, BeaconTypeV1
-from src.logic.BeaconsController import BeaconsController
-from src.persistence.BeaconsMemoryPersistence import BeaconsMemoryPersistence
+from service_beacons_python.data.version1 import BeaconV1, BeaconTypeV1
+from service_beacons_python.logic.BeaconsController import BeaconsController
+from service_beacons_python.persistence.BeaconsMemoryPersistence import BeaconsMemoryPersistence
 
 BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001", "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]},
                    50)

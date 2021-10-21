@@ -8,7 +8,7 @@
     :copyright: Conceptual Vision Consulting LLC 2018-2021, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
-from src.persistence.BeaconsFilePersistence import BeaconsFilePersistence
+from service_beacons_python.persistence.BeaconsFilePersistence import BeaconsFilePersistence
 from .BeaconsPersistenceFixture import BeaconsPersistenceFixture
 
 class TestBeaconFilePersistence():

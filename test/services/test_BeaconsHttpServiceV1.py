@@ -18,18 +18,17 @@ from pip_services3_commons.config import ConfigParams
 from pip_services3_commons.refer import References, Descriptor
 from pip_services3_commons.reflect import PropertyReflector
 from pip_services3_commons.run import Parameters
+from service_beacons_python.data.version1 import BeaconV1, BeaconTypeV1
+from service_beacons_python.logic.BeaconsController import BeaconsController
+from service_beacons_python.persistence.BeaconsMemoryPersistence import BeaconsMemoryPersistence
+from service_beacons_python.services.version1.BeaconsHttpServiceV1 import BeaconsHttpServiceV1
 
-from src.data.version1 import BeaconV1, BeaconTypeV1
-from src.logic.BeaconsController import BeaconsController
-from src.persistence.BeaconsMemoryPersistence import BeaconsMemoryPersistence
-from src.services.version1.BeaconsHttpServiceV1 import BeaconsHttpServiceV1
-
-BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001", "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]},
-                   50.0)
-BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002", "TestBeacon2", {"type": 'Point', "coordinates": [2, 2]},
-                   70.0)
-BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003", "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]},
-                   50.0)
+BEACON1 = BeaconV1("1", "1", BeaconTypeV1.AltBeacon, "00001",
+                   "TestBeacon1", {"type": 'Point', "coordinates": [0, 0]}, 50.0)
+BEACON2 = BeaconV1("2", "1", BeaconTypeV1.iBeacon, "00002",
+                   "TestBeacon2", {"type": 'Point', "coordinates": [2, 2]}, 70.0)
+BEACON3 = BeaconV1("3", "2", BeaconTypeV1.AltBeacon, "00003",
+                   "TestBeacon3", {"type": 'Point', "coordinates": [10, 10]}, 50.0)
 
 
 class TestBeaconsHttpServiceV1:

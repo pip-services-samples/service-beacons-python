@@ -1,5 +1,5 @@
 """
-Pip.Services service-beacons-python
+Pip.Services service_beacons_python
 ------------------
 
 The service-beacons microservice for working with beacons data.
