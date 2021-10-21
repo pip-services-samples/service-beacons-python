@@ -27,9 +27,9 @@ class BeaconsMongoDbPersistence(IdentifiableMongoDbPersistence, IBeaconsPersiste
         filter = filter if filter is not None else FilterParams()
         criteria = []
 
-        id = filter.get_as_nullable_string("id")
+        id = filter.get_as_nullable_string("id") or filter.get_as_nullable_string("_id")
         if id is not None:
-            criteria.append({"id": id})
+            criteria.append({"_id": id})
         site_id = filter.get_as_nullable_string("site_id")
         if site_id is not None:
             criteria.append({"site_id": site_id})

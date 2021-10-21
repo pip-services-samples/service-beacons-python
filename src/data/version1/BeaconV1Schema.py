@@ -15,7 +15,7 @@ from pip_services3_commons.validate.ObjectSchema import ObjectSchema
 
 class BeaconV1Schema(ObjectSchema):
     def __init__(self):
-        super(ObjectSchema, self).__init__()
+        super().__init__()
 
         self.with_optional_property("id", TypeCode.String)
         self.with_required_property("site_id", TypeCode.String)

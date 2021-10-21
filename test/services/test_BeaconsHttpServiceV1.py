@@ -66,7 +66,7 @@ class TestBeaconsHttpServiceV1:
         cls._service.close(None)
 
     def test_crud_operations(self):
-        time.sleep(2)
+        time.sleep(1)
         # Create the first beacon
         beacon1 = self.invoke("/v1/beacons/create_beacon",
                               Parameters.from_tuples("beacon", PropertyReflector.get_properties(BEACON1)))
@@ -127,14 +127,13 @@ class TestBeaconsHttpServiceV1:
         assert not beacon
 
     def invoke(self, route, entity) -> Union[bool, dict]:
-        params = {}
         route = "http://localhost:3002" + route
         response = None
         timeout = 10000
         # Call the service
         data = json.dumps(entity)
         try:
-            response = requests.request('POST', route, params=params, json=data, timeout=timeout)
+            response = requests.request('POST', route, json=data, timeout=timeout)
             return response.json()
         except JSONDecodeError:
             if response.status_code == 404:
