@@ -11,7 +11,7 @@
 
 
 class BeaconTypeV1:
-    Unknown = "unknown"
-    AltBeacon = "altbeacon"
-    iBeacon = "ibeacons"
-    EddyStoneUdi = "eddystone-udi"
+    Unknown: str = "unknown"
+    AltBeacon: str = "altbeacon"
+    iBeacon: str = "ibeacons"
+    EddyStoneUdi: str = "eddystone-udi"

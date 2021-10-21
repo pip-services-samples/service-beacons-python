@@ -55,7 +55,7 @@ class BeaconsMemoryPersistence(IdentifiableMemoryPersistence, IBeaconsPersistenc
         return super(BeaconsMemoryPersistence, self).get_page_by_filter(correlation_id,
                                                                         self.__compose_filter(filter), paging=paging)
 
-    def get_one_by_udi(self, correlation_id: Optional[str], udi: str) -> BeaconV1:
+    def get_one_by_udi(self, correlation_id: Optional[str], udi: str) -> Optional[BeaconV1]:
         if udi is None:
             return None
         for item in self._items:

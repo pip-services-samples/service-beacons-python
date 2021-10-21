@@ -8,10 +8,12 @@
     :copyright: Conceptual Vision Consulting LLC 2018-2021, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
+from typing import Optional
 
 from pip_services3_commons.commands import CommandSet, Command, ICommand
 from pip_services3_commons.convert import TypeCode
 from pip_services3_commons.data import FilterParams, PagingParams
+from pip_services3_commons.run import Parameters
 from pip_services3_commons.validate import ObjectSchema, FilterParamsSchema, PagingParamsSchema, ArraySchema
 
 from . import IBeaconsController
@@ -34,7 +36,7 @@ class BeaconsCommandSet(CommandSet):
         self.add_command(self.__make_delete_beacon_by_id_command())
 
     def __make_get_beacons_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             filter = FilterParams.from_value(args.get("filter"))
             paging = PagingParams.from_value(args.get("paging"))
             return self.__controller.get_beacons_by_filter(correlation_id, filter, paging)
@@ -43,21 +45,21 @@ class BeaconsCommandSet(CommandSet):
                        .with_optional_property("paging", PagingParamsSchema()), handler)
 
     def __make_get_beacon_by_id_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             id = args.get_as_string("id")
             return self.__controller.get_beacon_by_id(correlation_id, id)
 
         return Command("get_beacon_by_id", ObjectSchema().with_required_property("id", TypeCode.String), handler)
 
     def __make_get_beacon_by_udi_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             id = args.get_as_string("udi")
             return self.__controller.get_beacon_by_udi(correlation_id, id)
 
         return Command("get_beacon_by_udi", ObjectSchema().with_required_property("udi", TypeCode.String), handler)
 
     def __make_calculate_position_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             site_id = args.get_as_string("site_id")
             udis = args.get_as_nullable_string("udis")
             return self.__controller.calculate_position(correlation_id, site_id, udis)
@@ -66,21 +68,21 @@ class BeaconsCommandSet(CommandSet):
                        .with_required_property("udis", ArraySchema("String")), handler)
 
     def __make_create_beacon_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             entity = args.get("beacon")
             return self.__controller.create_beacon(correlation_id, entity)
 
         return Command("create_beacon", ObjectSchema().with_optional_property("beacon", BeaconV1Schema()), handler)
 
     def __make_update_beacon_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             entity = args.get("beacon")
             return self.__controller.update_beacon(correlation_id, entity)
 
         return Command("update_beacon", ObjectSchema().with_optional_property("beacon", BeaconV1Schema()), handler)
 
     def __make_delete_beacon_by_id_command(self) -> ICommand:
-        def handler(correlation_id, args):
+        def handler(correlation_id: Optional[str], args: Parameters):
             id = args.get_as_string("id")
             return self.__controller.delete_beacon_by_id(correlation_id, id)
 
