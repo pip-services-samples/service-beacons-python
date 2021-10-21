@@ -1,12 +1,5 @@
-iso8601
-PyYAML
-pystache
 pytest
-pytz
-bottle
-pybars3
 requests
-netifaces==0.10.9
  
 pip_services3_commons
 pip_services3_expressions
