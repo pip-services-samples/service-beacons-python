@@ -17,7 +17,7 @@ from pip_services3_components.log import ConsoleLogger
 # add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from src.containers.BeaconsProcess import BeaconsProcess
+from service_beacons_python.containers.BeaconsProcess import BeaconsProcess
 
 if __name__ == '__main__':
     runner = BeaconsProcess()
